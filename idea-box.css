@@ -16,9 +16,8 @@ body {
   width: 100%;
   display: flex;
   flex-direction:column;
-  justify-content: center;
   align-items: center;
-  height:1100px;
+  height: auto;
 }
 #search-box {
   width: 100%;
@@ -27,4 +26,45 @@ body {
 .ninety {
   border: solid 1px #D1D3D4;
   width: 90vw;
+}
+
+.ninety {
+  margin-top: 40px;
+}
+
+h1 {
+  margin-top: 40px;
+  margin-bottom: 0;
+  font-size: 100px;
+  color: #6D6E71;
+}
+
+#idea-content {
+  font-size: 42px;
+}
+
+#idea-title,
+#search {
+  height: 80px;
+  font-size: 42px;
+  padding-left: 5px;
+}
+
+#save-button {
+  height: 100px;
+  font-size: 42px;
+  padding-left: 5px;
+  margin-bottom: 40px;
+  background: #00A79D;
+  color: #FFFFFF;
+}
+
+#idea-title,
+#idea-content,
+#search {
+  border: solid 5px #D1D3D4;
+}
+
+#color-idea {
+  color: #00A79D;
 }
