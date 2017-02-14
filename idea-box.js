@@ -20,7 +20,6 @@ $('#save-button').on('click', function() {
 
   $('#idea-title').val('');
   $('#idea-content').val('');
-
 });
 
 $('#display-side').on('click', '#upvote-button', function () {
@@ -44,7 +43,7 @@ $('#display-side').on('click', '#downvote-button', function () {
 $('#display-side').on('click', '#delete-button', function() {
   var $whatIsDeleted = $(this).closest('.idea-card');
   $whatIsDeleted.remove();
-})
+});
 
 
 //global variables
