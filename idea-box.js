@@ -1,6 +1,7 @@
-$('#save-button').on('click', function() {
+  $('#save-button').on('click', function() {
   var $ideaTitle = $('#idea-title').val();
   var $ideaContent = $('#idea-content').val();
+
 
   $('#display-side').prepend(
     `<div class='idea-card'>
@@ -17,6 +18,14 @@ $('#save-button').on('click', function() {
         <p id='quality-line'>quality:  <span>swill</span></p>
       </div>
      </div>`);
+
+     var numCards = $(".idea-card");
+     var stringed = JSON.stringify(numCards);
+     localStorage.setItem("huh", stringed);
+     console.log(numCards);
+     var retObj = localStorage.getItem("huh");
+     var parsedObj = JSON.parse(retObj);
+     console.log(parsedObj);
 
   $('#idea-title').val('');
   $('#idea-content').val('');
@@ -49,8 +58,6 @@ $('#display-side').on('click', '#delete-button', function() {
 //global variables
 // var $ideaTitle = $('idea-title');
 // var $ideaContent = $('idea-title');
-
-
 // //Deleting an idea card
 // $('#display-side').on('click', '#delete-button', function() {
 //   $(this).parent('.idea-card').remove();
