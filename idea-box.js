@@ -1,24 +1,9 @@
-$('#save-button').on('click', function() {
+$('#save-button').on('click' function() {
   var $ideaTitle = $('#idea-title').val();
   var $ideaContent = $('#idea-content').val();
 
   $('#display-side').prepend(
-    `<div class='idea-card'>
-      <div id='line-1'>
-        <h2>${$ideaTitle}</h2>
-        <button id='delete-button'>Delete</button>
-      </div>
-      <p id='line-2'>${$ideaContent}</p>
-      <div id='line-3'>
-        <button id='upvote-button'>up</button>
-        <button id='downvote-button'>down</button>
-        <p>quality:  swill</p>
-      </div>
-     </div>`);
-
-  $('#idea-title').val('');
-  $('#idea-content').val('');
-
+    "<div class='idea-card'><h2>" + $ideaTitle + "</h2><button id='delete-button'>x</button><p>" + $ideaContent + "</p><button id='upvote-button'>x</button><buttonid='downvote-button'>x</button><p>quality: swill</p></div>"
 });
 
 
@@ -32,7 +17,6 @@ function clearField () {
   $ideaContent.val("");
 }
 
-//NOTE: Found code pen on making content editable by user. .onBlur() function to commit changes????
 // <div contenteditable="true">
 //   This text can be edited by the user.
 // </div>
