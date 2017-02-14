@@ -11,7 +11,7 @@ $('#save-button').on('click', function() {
       <p id='line-2' contenteditable='true'>${$ideaContent}</p>
       <div id='line-3'>
         <button id='upvote-button'>
-          <img src="images/upvote.svg" alt="">
+          <img src="images/upvote.svg" width='20' height='20' alt="">
         </button>
         <button id='downvote-button'>down</button>
         <p id='quality-line'>quality:  <span>swill</span></p>
@@ -20,9 +20,6 @@ $('#save-button').on('click', function() {
 
   $('#idea-title').val('');
   $('#idea-content').val('');
-
-// <button><img src="images/add.gif" alt="add"
-// width="10" height="10" /> Add</button>
 
 });
 
@@ -43,6 +40,11 @@ $('#display-side').on('click', '#downvote-button', function () {
     $qualityText.text('swill');
   }
 });
+
+$('#display-side').on('click', '#delete-button', function() {
+  var $whatIsDeleted = $(this).closest('.idea-card');
+  $whatIsDeleted.remove();
+})
 
 
 //global variables
