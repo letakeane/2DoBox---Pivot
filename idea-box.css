@@ -1,0 +1,30 @@
+body {
+  height: 100vh;
+  width:100vw;
+}
+
+#input-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#enter-div {
+  background-color:#E5F3F2;
+  width: 100%;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  height:1100px;
+}
+#search-box {
+  width: 100%;
+}
+
+.ninety {
+  border: solid 1px #D1D3D4;
+  width: 90vw;
+}
