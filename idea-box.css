@@ -68,3 +68,32 @@ h1 {
 #color-idea {
   color: #00A79D;
 }
+
+/*idea-card layout*/
+.idea-card {
+  margin-top: 60px;
+  border-bottom: solid 5px #D1D3D4;
+}
+
+#line-1,
+#line-2,
+#line-3 {
+  position: relative;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 {
+  display: inline-block;
+  font-size: 70px;
+  color: #6D6E71;
+}
+
+#line-2 {
+  font-size: 42px;
+}
+
+#line-3 p {
+  font-size: 36px;
+}
