@@ -87,7 +87,27 @@ $('#display-side').on('click', '#delete-button', function() {
   localStorage.removeItem(idValue);
 });
 
+$('#search').on('keyup', function() {
+// console.log("works");
+//compare search value to card title
+var $searchInput = $(this).val();
+var $cardTitle = $('.idea-card').find('h2');
+//compare search value to card idea
 
+var $cardMatch = $cardTitle.match($searchInput);
+
+
+if ($cardMatch == null) {
+  console.log(($cardTitle).parent());
+  // $('.cardTitle').toggle();
+  ($cardTitle).closest('.idea-card').toggle($cardMatch);
+}
+
+//want to Toggle actual bookmark when we do not get a match
+//remove cards that are not matching
+
+//when deleting cards should repopulate
+})
 
 //global variables
 // var $ideaTitle = $('idea-title');
