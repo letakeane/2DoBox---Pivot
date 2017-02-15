@@ -11,14 +11,18 @@ function prependCard($id, $ideaTitle, $ideaContent) {
     `<div class='idea-card' id=${$id}>
       <div id='line-1'>
         <h2 contenteditable='true'>${$ideaTitle}</h2>
-        <button id='delete-button'>Delete</button>
+        <button id='delete-button'>
+        <img src="images/delete.svg" alt="">
+        </button>
       </div>
       <p id='line-2' contenteditable='true'>${$ideaContent}</p>
       <div id='line-3'>
         <button id='upvote-button'>
-          <img src="images/upvote.svg" width='20' height='20' alt="">
+          <img src="images/upvote.svg" alt="">
         </button>
-        <button id='downvote-button'>down</button>
+        <button id='downvote-button'>
+        <img src="images/downvote.svg" alt="">
+        </button>
         <p id='quality-line'>quality:  <span id="qual">swill</span></p>
       </div>
      </div>`);
@@ -98,16 +102,17 @@ $('#display-side').on('click', '#delete-button', function() {
 // })
 //
 //
-// //Search Bar ideas
-//
-// //on keyup run filtering function
-// $('#search').on('keyup',function {
-//
-// //compare search value to card title
-//
-// //compare search value to card idea
-//
-// //remove cards that are not matching
-//
-// //when deleting cards should repopulate
-// })
+//Search Bar ideas
+
+//on keyup run filtering function
+$('#search').on('keyup', function() {
+// console.log("works");
+//compare search value to card title
+var $searchInput = $(this).val();
+var $cardTitle = $('.idea-card').find('h2').text();
+//compare search value to card idea
+console.log($cardTitle);
+//remove cards that are not matching
+
+//when deleting cards should repopulate
+})
