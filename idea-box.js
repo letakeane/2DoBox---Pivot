@@ -1,6 +1,23 @@
+  function Idea(id, title, body) {
+  this.id = id;
+  this.title = title;
+  this.body = body;
+}
+
   $('#save-button').on('click', function() {
   var $ideaTitle = $('#idea-title').val();
   var $ideaContent = $('#idea-content').val();
+  var id = event.timeStamp;
+  var newIdea = new Idea(id, $ideaTitle, $ideaContent);
+  console.log(newIdea);
+
+  function stringifyObj (newIdea) {
+    var stringifiedIdea = JSON.stringify(newIdea);
+    console.log(stringifiedIdea);
+    localStorage.setItem(id, stringifiedIdea);
+  }
+  stringifyObj(newIdea);
+
 
 
   $('#display-side').prepend(
@@ -15,21 +32,23 @@
           <img src="images/upvote.svg" width='20' height='20' alt="">
         </button>
         <button id='downvote-button'>down</button>
-        <p id='quality-line'>quality:  <span>swill</span></p>
+        <p id='quality-line'>quality:  <span id="qual">swill</span></p>
       </div>
      </div>`);
 
-     var numCards = $(".idea-card");
-     var stringed = JSON.stringify(numCards);
-     localStorage.setItem("huh", stringed);
-     console.log(numCards);
-     var retObj = localStorage.getItem("huh");
-     var parsedObj = JSON.parse(retObj);
-     console.log(parsedObj);
+    //  var numCards = $(".idea-card");
+    //  var stringed = JSON.stringify(numCards);
+    //  localStorage.setItem("huh", stringed);
+    //  console.log(numCards);
+    //  var retObj = localStorage.getItem("huh");
+    //  var parsedObj = JSON.parse(retObj);
+    //  console.log(parsedObj);
 
   $('#idea-title').val('');
   $('#idea-content').val('');
 });
+
+
 
 $('#display-side').on('click', '#upvote-button', function () {
   var $qualityText = $(this).siblings('#quality-line').children();
@@ -53,6 +72,7 @@ $('#display-side').on('click', '#delete-button', function() {
   var $whatIsDeleted = $(this).closest('.idea-card');
   $whatIsDeleted.remove();
 });
+
 
 
 //global variables
