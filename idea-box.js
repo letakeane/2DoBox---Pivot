@@ -1,27 +1,14 @@
-  function Idea(id, title, body) {
+function Idea(id, title, body, quality) {
   this.id = id;
   this.title = title;
   this.body = body;
+  this.quality = quality;
+  console.log(this.quality);
 }
 
-  $('#save-button').on('click', function() {
-  var $ideaTitle = $('#idea-title').val();
-  var $ideaContent = $('#idea-content').val();
-  var id = event.timeStamp;
-  var newIdea = new Idea(id, $ideaTitle, $ideaContent);
-  console.log(newIdea);
-
-  function stringifyObj (newIdea) {
-    var stringifiedIdea = JSON.stringify(newIdea);
-    console.log(stringifiedIdea);
-    localStorage.setItem(id, stringifiedIdea);
-  }
-  stringifyObj(newIdea);
-
-
-
+function prependCard($id, $ideaTitle, $ideaContent) {
   $('#display-side').prepend(
-    `<div class='idea-card'>
+    `<div class='idea-card' id=${$id}>
       <div id='line-1'>
         <h2 contenteditable='true'>${$ideaTitle}</h2>
         <button id='delete-button'>Delete</button>
@@ -35,20 +22,37 @@
         <p id='quality-line'>quality:  <span id="qual">swill</span></p>
       </div>
      </div>`);
+}
 
-    //  var numCards = $(".idea-card");
-    //  var stringed = JSON.stringify(numCards);
-    //  localStorage.setItem("huh", stringed);
-    //  console.log(numCards);
-    //  var retObj = localStorage.getItem("huh");
-    //  var parsedObj = JSON.parse(retObj);
-    //  console.log(parsedObj);
+$(document).ready(function () {
+  console.log("Document Loaded");
+  for(var i=0;i<localStorage.length;i++) {
+      var obj = localStorage.getItem(localStorage.key(i));
+      var parsedobj = JSON.parse(obj);
+      var $ideaTitle = parsedobj.title;
+      var $ideaContent = parsedobj.body;
+      var $id = parsedobj.id;
+      var $quality = parsedobj.quality;
+      prependCard($id, $ideaTitle, $ideaContent, $quality);
+  }
+});
+
+$('#save-button').on('click', function() {
+  var $ideaTitle = $('#idea-title').val();
+  var $ideaContent = $('#idea-content').val();
+  var $id = $.now();
+  var $quality = $('#qual').text();
+  console.log($quality);
+  var newIdea = new Idea($id, $ideaTitle, $ideaContent, $quality);
+  var stringifiedIdea = JSON.stringify(newIdea);
+  console.log(stringifiedIdea);
+  localStorage.setItem($id, stringifiedIdea);
+
+  prependCard($id, $ideaTitle, $ideaContent, $quality);
 
   $('#idea-title').val('');
   $('#idea-content').val('');
 });
-
-
 
 $('#display-side').on('click', '#upvote-button', function () {
   var $qualityText = $(this).siblings('#quality-line').children();
@@ -57,6 +61,14 @@ $('#display-side').on('click', '#upvote-button', function () {
   } else if ($qualityText.text() === 'plausible') {
     $qualityText.text('genius');
   }
+
+  var $quality = $('#qual').text();
+  console.log($quality);
+  // var newIdea = new Idea($id, $ideaTitle, $ideaContent, $quality);
+  // var stringifiedIdea = JSON.stringify(newIdea);
+  // console.log(stringifiedIdea);
+  // localStorage.setItem($id, stringifiedIdea);
+
 });
 
 $('#display-side').on('click', '#downvote-button', function () {
@@ -71,6 +83,8 @@ $('#display-side').on('click', '#downvote-button', function () {
 $('#display-side').on('click', '#delete-button', function() {
   var $whatIsDeleted = $(this).closest('.idea-card');
   $whatIsDeleted.remove();
+  var idValue = $whatIsDeleted.attr('id');
+  localStorage.removeItem(idValue);
 });
 
 
