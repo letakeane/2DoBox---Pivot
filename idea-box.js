@@ -12,17 +12,14 @@ function prependCard($id, $ideaTitle, $ideaContent, $quality) {
         <div  id='line-1'>
           <h2 class='titleEdit' contenteditable='true'>${$ideaTitle}</h2>
           <button id='delete-button'>
-          <img src="images/delete.svg" alt="">
           </button>
         </div>
         <p id='line-2' contenteditable='true'>${$ideaContent}</p>
       </div>
       <div id='line-3'>
         <button id='upvote-button'>
-          <img src="images/upvote.svg" alt="">
         </button>
         <button id='downvote-button'>
-        <img src="images/downvote.svg" alt="">
         </button>
         <p id='quality-line'>quality:  <span id="qual">${$quality}</span></p>
       </div>
@@ -128,3 +125,13 @@ $('#search').on('keyup', function() {
       }
     });
 });
+
+$('#idea-title, #idea-content').on('keyup', function () {
+  var $ideaTitle = $('#idea-title');
+  var $ideaContent = $('#idea-content');
+  if ($ideaTitle.val() !== "" && $ideaContent.val() !== ""){
+    $('#save-button').prop('disabled', false);
+  } else {
+    $('#save-button').prop('disabled', true);
+  }
+})
