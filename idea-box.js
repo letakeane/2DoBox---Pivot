@@ -9,7 +9,7 @@ function prependCard($id, $ideaTitle, $ideaContent, $quality) {
   $('#display-side').prepend(
     `<div class='idea-card' id=${$id}>
       <div id='line-1'>
-        <h2 contenteditable='true'>${$ideaTitle}</h2>
+        <h2 class='titleEdit' contenteditable='true'>${$ideaTitle}</h2>
         <button id='delete-button'>
         <img src="images/delete.svg" alt="">
         </button>
@@ -124,6 +124,23 @@ $('#display-side').on('click', '#downvote-button', function () {
   } else if ($qualityText.text() === 'plausible') {
     $qualityText.text('swill');
   }
+
+  var $whatIsGrabbed = $(this).closest('.idea-card');
+  var idValue = $whatIsGrabbed.attr('id');
+  console.log(idValue + " " + $whatIsGrabbed);
+  var lsitem = localStorage.getItem(idValue);
+  var parselsitem = JSON.parse(lsitem);
+  console.log(parselsitem);
+
+  var $quality = $qualityText.text();
+  console.log($quality);
+
+  parselsitem.quality = $quality;
+  console.log(parselsitem);
+  var stringedit = JSON.stringify(parselsitem);
+  console.log(stringedit)
+  localStorage.setItem(idValue, stringedit);
+
 });
 
 $('#display-side').on('click', '#delete-button', function() {
@@ -136,26 +153,94 @@ $('#display-side').on('click', '#delete-button', function() {
 
 
 
-$('#idea-title').focusout(function () {
-  console.log("Hey Hey Blur");
+
+
+$('#display-side').on('blur', '.titleEdit', function () {
+
+  var $ideaTitle = $(this).text();
+  console.log($ideaTitle);
+
+  var $whatIsGrabbed = $(this).closest('.idea-card');
+  var idValue = $whatIsGrabbed.attr('id');
+  console.log(idValue + " " + $whatIsGrabbed);
+  var lsitem = localStorage.getItem(idValue);
+  var parselsitem = JSON.parse(lsitem);
+  console.log(parselsitem);
+
+  // var $title = $qualityText.text();
+  // console.log($quality);
+
+  parselsitem.title = $ideaTitle;
+  console.log(parselsitem);
+  var stringedit = JSON.stringify(parselsitem);
+  console.log(stringedit)
+  localStorage.setItem(idValue, stringedit);
+
+});
+
+$('#display-side').on('blur', '#line-2', function () {
+
+  var $ideaContent = $(this).text();
+  console.log($ideaContent);
+
+  var $whatIsGrabbed = $(this).closest('.idea-card');
+  var idValue = $whatIsGrabbed.attr('id');
+  console.log(idValue + " " + $whatIsGrabbed);
+  var lsitem = localStorage.getItem(idValue);
+  var parselsitem = JSON.parse(lsitem);
+  console.log(parselsitem);
+
+  // var $title = $qualityText.text();
+  // console.log($quality);
+
+  parselsitem.body = $ideaContent;
+  console.log(parselsitem);
+  var stringedit = JSON.stringify(parselsitem);
+  console.log(stringedit)
+  localStorage.setItem(idValue, stringedit);
+
 });
 
 
-// // $('#search').on('keyup', function() {
-// // // console.log("works");
-// // //compare search value to card title
-// // var $searchInput = $(this).val();
-// // var $cardTitle = $('.idea-card').find('h2');
-// // //compare search value to card idea
-// //
-// // var $cardMatch = $cardTitle.match($searchInput);
-// //
-// //
-// // if ($cardMatch == null) {
-// //   console.log(($cardTitle).parent());
-// //   // $('.cardTitle').toggle();
-// //   ($cardTitle).closest('.idea-card').toggle($cardMatch);
-// // }
+$('#search').on('keyup', function() {
+    var searchInput = $(this).val();
+  for(var i=0;i<localStorage.length;i++) {
+      var obj = localStorage.getItem(localStorage.key(i));
+      var parsedobj = JSON.parse(obj);
+      var string = parsedobj.title;
+      var id = parsedobj.id;
+      // console.log(string);
+
+      if (string.includes(searchInput)) {
+
+        console.log('match');
+      }
+      else {
+        $('.idea-card').toggle();
+        console.log("no match");
+      }
+
+      if (searchInput == "") {
+        $('.idea-card').toggle();
+      }
+
+
+    }
+});
+// // console.log("works");
+// //compare search value to card title
+// var $searchInput = $(this).val();
+// var $cardTitle = $('.idea-card').find('h2');
+// //compare search value to card idea
+//
+// var $cardMatch = $cardTitle.match($searchInput);
+//
+//
+// if ($cardMatch == null) {
+//   console.log(($cardTitle).parent());
+//   // $('.cardTitle').toggle();
+//   ($cardTitle).closest('.idea-card').toggle($cardMatch);
+// }
 // //
 // // //want to Toggle actual bookmark when we do not get a match
 // // //remove cards that are not matching
