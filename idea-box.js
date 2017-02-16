@@ -8,7 +8,7 @@ function Idea(id, title, body, quality="swill") {
 function prependCard($id, $ideaTitle, $ideaContent, $quality) {
   $('#display-side').prepend(
     `<div class='idea-card' id=${$id}>
-      <div class='titleLine'>
+      <div class='title-line'>
         <div  id='line-1'>
           <h2 class='titleEdit' contenteditable='true'>${$ideaTitle}</h2>
           <button id='delete-button'>
@@ -119,7 +119,7 @@ $('#display-side').on('blur', '#line-2', function () {
 
 $('#search').on('keyup', function() {
     var searchInput = $(this).val().toLowerCase();
-    $('.titleLine').each(function() {
+    $('.title-line').each(function() {
       var searchText = $(this).text().toLowerCase();
       if (!!searchText.match(searchInput)) {
         $(this).closest('.idea-card').toggle(true);
