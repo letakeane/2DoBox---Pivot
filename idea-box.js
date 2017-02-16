@@ -8,13 +8,13 @@ function Idea(id, title, body, quality="swill") {
 function prependCard($id, $ideaTitle, $ideaContent, $quality) {
   $('#display-side').prepend(
     `<div class='idea-card' id=${$id}>
-      <div id='line-1'>
+      <div class='titleLine' id='line-1'>
         <h2 class='titleEdit' contenteditable='true'>${$ideaTitle}</h2>
         <button id='delete-button'>
         <img src="images/delete.svg" alt="">
         </button>
+        <p id='line-2' contenteditable='true'>${$ideaContent}</p>
       </div>
-      <p id='line-2' contenteditable='true'>${$ideaContent}</p>
       <div id='line-3'>
         <button id='upvote-button'>
           <img src="images/upvote.svg" alt="">
@@ -58,8 +58,6 @@ $(document).ready(function () {
 // $('h2').on('blur', '[contenteditable]', function() {
 //   console.log("Yo Blur");
 // });
-
-
 
 $('#save-button').on('click', function() {
   var $ideaTitle = $('#idea-title').val();
@@ -150,11 +148,6 @@ $('#display-side').on('click', '#delete-button', function() {
   localStorage.removeItem(idValue);
 });
 
-
-
-
-
-
 $('#display-side').on('blur', '.titleEdit', function () {
 
   var $ideaTitle = $(this).text();
@@ -201,32 +194,27 @@ $('#display-side').on('blur', '#line-2', function () {
 
 });
 
-
 $('#search').on('keyup', function() {
-    var searchInput = $(this).val();
-  for(var i=0;i<localStorage.length;i++) {
-      var obj = localStorage.getItem(localStorage.key(i));
-      var parsedobj = JSON.parse(obj);
-      var string = parsedobj.title;
-      var id = parsedobj.id;
-      // console.log(string);
-
-      if (string.includes(searchInput)) {
-
-        console.log('match');
+    var searchInput = $(this).val().toLowerCase();
+    $('.titleLine').each(function() {
+      var searchText = $(this).text().toLowerCase();
+      if (!!searchText.match(searchInput)) {
+        $(this).closest('.idea-card').toggle(true);
+      }else {
+        $(this).closest('.idea-card').toggle(false);
       }
-      else {
-        $('.idea-card').toggle();
-        console.log("no match");
-      }
-
-      if (searchInput == "") {
-        $('.idea-card').toggle();
-      }
-
-
-    }
+    });
+    // $('.bodyLine').each(function() {
+    //   var searchText = $(this).text().toLowerCase();
+    //   if (!!searchText.match(searchInput)) {
+    //     $(this).closest('.idea-card').toggle(true);
+    //   }else {
+    //     $(this).closest('.idea-card').toggle(false);
+    //   }
+    // });
 });
+
+
 // // console.log("works");
 // //compare search value to card title
 // var $searchInput = $(this).val();
