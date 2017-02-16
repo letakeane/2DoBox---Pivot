@@ -8,13 +8,13 @@ function Idea(id, title, body, quality="swill") {
 function prependCard($id, $ideaTitle, $ideaContent, $quality) {
   $('#display-side').prepend(
     `<div class='idea-card' id=${$id}>
-    <div class='titleLine'>
-      <div  id='line-1'>
-        <h2 class='titleEdit' contenteditable='true'>${$ideaTitle}</h2>
-        <button id='delete-button'>
-        <img src="images/delete.svg" alt="">
-        </button>
-      </div>
+      <div class='titleLine'>
+        <div  id='line-1'>
+          <h2 class='titleEdit' contenteditable='true'>${$ideaTitle}</h2>
+          <button id='delete-button'>
+          <img src="images/delete.svg" alt="">
+          </button>
+        </div>
         <p id='line-2' contenteditable='true'>${$ideaContent}</p>
       </div>
       <div id='line-3'>
@@ -69,19 +69,6 @@ $('#display-side').on('click', '#upvote-button', function () {
   parselsitem.quality = $quality;
   var stringedit = JSON.stringify(parselsitem);
   localStorage.setItem(idValue, stringedit);
-
-
-
-  // var $quality = $('#qual').text();
-  // console.log($quality);
-
-
-
-  // var newIdea = new Idea($id, $ideaTitle, $ideaContent, $quality);
-  // var stringifiedIdea = JSON.stringify(newIdea);
-  // console.log(stringifiedIdea);
-  // localStorage.setItem($id, stringifiedIdea);
-
 });
 
 $('#display-side').on('click', '#downvote-button', function () {
