@@ -11,11 +11,13 @@ function Todo(id, title, body, importance="normal") {
   this.body = body;
   this.importance = importance;
   this.complete = false;
+  this.hidden = "";
 }
 
-function prependCard($id, $todoTitle, $todoContent, $importance, $complete) {
+function prependCard($id, $todoTitle, $todoContent, $importance, $complete, $hidden) {
+  if ($hidden != "hide"){
   $('#display-side').prepend(
-    `<div class='todo-card' id=${$id}>
+    `<div class='todo-card ${$hidden}' id=${$id}>
       <div class='title-line'>
         <div  id='line-1'>
           <h2 class='titleEdit' contenteditable='true'>${$todoTitle}</h2>
@@ -30,7 +32,25 @@ function prependCard($id, $todoTitle, $todoContent, $importance, $complete) {
         <button id='completed-button' class='${$complete}'></button>
       </div>
      </div>`);
-}
+  } else {
+     $('#hidden-cards').prepend(
+     `<div class='todo-card ${$hidden}' id=${$id}>
+       <div class='title-line'>
+         <div  id='line-1'>
+           <h2 class='titleEdit' contenteditable='true'>${$todoTitle}</h2>
+           <button id='delete-button'></button>
+         </div>
+         <p id='line-2' contenteditable='true'>${$todoContent}</p>
+       </div>
+       <div id='line-3'>
+         <button id='upvote-button'></button>
+         <button id='downvote-button'></button>
+         <p id='importance-line'>importance: <span id="qual">${$importance}</span></p>
+         <button id='completed-button' class='${$complete}'></button>
+       </div>
+      </div>`);
+    };
+};
 
 $(document).ready(function () {
   for(var i=0;i<localStorage.length;i++) {
@@ -47,10 +67,12 @@ function displayParsed (storedInput) {
   var $complete = storedInput.complete;
   if ($complete === true){
     $complete = 'completed-on'
+    $hidden = 'hide'
   } else {
     $complete = 'completed-button'
+    $hidden = ""
   }
-  prependCard($id, $todoTitle, $todoContent, $importance, $complete);
+  prependCard($id, $todoTitle, $todoContent, $importance, $complete, $hidden);
 }
 
 $('#save-button').on('click', function() {
@@ -59,19 +81,19 @@ $('#save-button').on('click', function() {
   var $id = $.now();
   var $importance = 'normal';
   storeNewTodo($id, $todoTitle, $todoContent);
-  prependCard($id, $todoTitle, $todoContent, $importance);
+  prependCard($id, $todoTitle, $todoContent, $importance, 'completed-button', "");
   clearInput();
 });
-
-function clearInput () {
-  $('#todo-title').val('');
-  $('#todo-content').val('');
-}
 
 function storeNewTodo ($id, $todoTitle, $todoContent) {
   var newTodo = new Todo($id, $todoTitle, $todoContent);
   var stringifiedTodo = JSON.stringify(newTodo);
   localStorage.setItem($id, stringifiedTodo);
+}
+
+function clearInput () {
+  $('#todo-title').val('');
+  $('#todo-content').val('');
 }
 
 $('#display-side').on('click', '#upvote-button', function () {
@@ -141,6 +163,11 @@ function storeCompleted (presentCard, newCompleted) {
   parselsitem.complete = newCompleted;
   localStorage.setItem($idValue, JSON.stringify(parselsitem));
 };
+
+$('#input-side').on('click', '#show-completed', function() {
+  $('.todo-card').removeClass('hide');
+  console.log('blah blah')
+})
 
 $('#display-side').on('click', '#delete-button', function() {
   var $whatIsDeleted = $(this).closest('.todo-card');
