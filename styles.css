@@ -9,14 +9,7 @@ body {
   color: #00A79D;
 }
 
-.completed {
-  background: linear-gradient(
-    rgba(0, 167, 157, .4),
-    rgba(0, 167, 157, .4)
-  );
-}
-
-#completed-button {
+.completed-button {
   background: none;
   border: none;
   background-image: url('images/completed.svg');
@@ -28,12 +21,20 @@ body {
   margin-top: 22px;
 }
 
-#completed-button:hover {
+.completed-button:hover {
   background-image: url('images/completed-hover.svg');
 }
 
-#completed-button:active {
+.completed-on {
+  background: none;
+  border: none;
   background-image: url('images/completed-hover.svg');
+  background-repeat: no-repeat;
+  text-align: right;
+  width: 30px;
+  margin-right: 10px;
+  height: 50px;
+  margin-top: 22px;
 }
 
 #display-side {
