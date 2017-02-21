@@ -5,8 +5,40 @@ body {
   width: 100vw;
 }
 
-#color-idea {
-    color: #00A79D;
+#color-title {
+  color: #00A79D;
+}
+
+.completed-button {
+  background: none;
+  border: none;
+  background-image: url('images/completed.svg');
+  background-repeat: no-repeat;
+  text-align: right;
+  width: 30px;
+  margin-right: 10px;
+  height: 50px;
+  margin-top: 22px;
+}
+
+.completed-button:hover {
+  background-image: url('images/completed-hover.svg');
+}
+
+.completed-on {
+  background: none;
+  border: none;
+  background-image: url('images/completed-hover.svg');
+  background-repeat: no-repeat;
+  text-align: right;
+  width: 30px;
+  margin-right: 10px;
+  height: 50px;
+  margin-top: 22px;
+}
+
+.hide {
+  display: none;
 }
 
 #display-side {
@@ -26,6 +58,21 @@ body {
   background-image: url('images/delete-hover.svg');
 }
 
+#downvote-button {
+  background: none;
+  border: none;
+  background-image: url('images/downvote.svg');
+  background-repeat: no-repeat;
+  width: 30px;
+  margin-right: 10px;
+  height: 50px;
+  margin-top: 22px;
+}
+
+#downvote-button:hover {
+  background-image: url('images/downvote-hover.svg');
+}
+
 #enter-div {
   display: flex;
   flex-direction: column;
@@ -33,6 +80,13 @@ body {
   height: auto;
   background-color: #E5F3F2;
   width: 100%;
+}
+
+#filter,
+#todo-title {
+  font-size: 24px;
+  letter-spacing: 1px;
+  border: 2px solid #D1D3D4;
 }
 
 h1{
@@ -46,22 +100,9 @@ h2 {
   color: #6D6E71;
 }
 
-.idea-card {
-  margin: 0 auto;
-  width: 90%;
-}
-
-#idea-content {
-  font-size: 24px;
-  max-width: 90%;
-  max-height: 80px;
-  min-height: 80px;
-  letter-spacing: 1px;
-  border: 2px solid #D1D3D4;
-}
-
-#idea-title {
-  font-size: 12px;
+#importance-line {
+  color: #6D6E71;
+  flex-grow: 2;
 }
 
 #input-side {
@@ -102,10 +143,6 @@ p{
   margin: 0;
 }
 
-#quality-line {
-  color: #6D6E71;
-}
-
 #save-button {
   margin-bottom: 20px;
   font-size: 20px;
@@ -121,9 +158,16 @@ p{
     background: #045E55;
 }
 
-#search,
-#idea-title {
+.todo-card {
+  margin: 0 auto;
+  width: 90%;
+}
+
+#todo-content {
   font-size: 24px;
+  max-width: 90%;
+  max-height: 80px;
+  min-height: 80px;
   letter-spacing: 1px;
   border: 2px solid #D1D3D4;
 }
@@ -143,23 +187,14 @@ p{
   background-image: url('images/upvote-hover.svg');
 }
 
-#downvote-button {
-  background: none;
-  border: none;
-  background-image: url('images/downvote.svg');
-  background-repeat: no-repeat;
-  width: 30px;
-  margin-right: 10px;
-  height: 50px;
-  margin-top: 22px;
-}
 
-#downvote-button:hover {
-  background-image: url('images/downvote-hover.svg');
-}
 
 
 @media screen and (min-width: 600px) {
+  h1 {
+    font-size: 70px;
+  }
+
   #input-side {
     display: flex;
     flex-direction: column;
@@ -174,20 +209,15 @@ p{
     margin-top: 20px;
   }
 
-  h1 {
-    font-size: 70px;
-  }
+    .todo-card {
+      margin:0 auto;
+      width: 50%;
+    }
 
-  #idea-content {
+  #todo-content {
     min-height: 0;
     max-height: 26px;
     max-width: 50%;
     min-width: 50%;
   }
-
-  .idea-card {
-    margin:0 auto;
-    width: 50%;
-  }
-
 }
