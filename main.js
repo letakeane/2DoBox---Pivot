@@ -1,8 +1,24 @@
-$(document).on('pageload', function () {
-  for(var i=0;i<localStorage.length;i++) {
+$(document).ready(function () {
+  if(localStorage.length > 10){
+    for(var i = (localStorage.length - 10); i < localStorage.length; i++) {
+      var parsedobj = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      displayParsed(parsedobj);
+    }
+  } else {
+    loadAll()
+  }
+});
+
+function loadAll() {
+  for(var i = 0; i < localStorage.length; i++) {
     var parsedobj = JSON.parse(localStorage.getItem(localStorage.key(i)));
     displayParsed(parsedobj)
   }
+};
+
+$('#show-all-button').on('click', function () {
+  $('.todo-card').remove();
+  loadAll();
 });
 
 function Todo(id, title, body, importance="normal") {
@@ -52,12 +68,6 @@ function prependCard($id, $todoTitle, $todoContent, $importance, $complete, $hid
     };
 };
 
-$(document).ready(function () {
-  for(var i=0;i<localStorage.length;i++) {
-    var parsedobj = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    displayParsed(parsedobj)
-  }
-});
 
 function displayParsed (storedInput) {
   var $todoTitle = storedInput.title;
