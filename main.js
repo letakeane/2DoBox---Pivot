@@ -10,9 +10,10 @@ function Todo(id, title, body, importance="normal") {
   this.title = title;
   this.body = body;
   this.importance = importance;
+  this.complete = false;
 }
 
-function prependCard($id, $todoTitle, $todoContent, $importance) {
+function prependCard($id, $todoTitle, $todoContent, $importance, $complete) {
   $('#display-side').prepend(
     `<div class='todo-card' id=${$id}>
       <div class='title-line'>
@@ -26,7 +27,7 @@ function prependCard($id, $todoTitle, $todoContent, $importance) {
         <button id='upvote-button'></button>
         <button id='downvote-button'></button>
         <p id='importance-line'>importance: <span id="qual">${$importance}</span></p>
-        <button id='completed-button'></button>
+        <button id='completed-button' class='${$complete}'></button>
       </div>
      </div>`);
 }
@@ -43,7 +44,13 @@ function displayParsed (storedInput) {
   var $todoContent = storedInput.body;
   var $id = storedInput.id;
   var $importance = storedInput.importance;
-  prependCard($id, $todoTitle, $todoContent, $importance);
+  var $complete = storedInput.complete;
+  if ($complete === true){
+    $complete = 'completed-on'
+  } else {
+    $complete = 'completed-button'
+  }
+  prependCard($id, $todoTitle, $todoContent, $importance, $complete);
 }
 
 $('#save-button').on('click', function() {
@@ -108,36 +115,32 @@ function storeImportance (presentCard, newImportance) {
   localStorage.setItem($idValue, JSON.stringify(parselsitem));
 }
 
-//Zane - started working on the feature that lets users mark tasks as completed
-// $('#display-side').on('click', '#completed-button', function () {
-//   $(this).parents('.todo-card').toggleClass('completed');
-//
-//   if ($(this).siblings('#upvote-button', '#downvote-button').prop('enabled')) {
-//     $(this).siblings('#upvote-button', '#downvote-button').prop('disabled');
-//   } else if ($(this).siblings('#upvote-button', '#downvote-button').toggleClas('disabled')) {
-//     $(this).siblings('#upvote-button', '#downvote-button').prop('enabled');
-//   };
-//
-//   if ($(this).parents('.todo-card').children('#delete-button').prop('enabled')) {
-//     $(this).parents('.todo-card').children('#delete-button').prop('disabled');
-//   } else if ($(this).parents('.todo-card').children('#delete-button').prop('disabled')) {
-//     $(this).parents('.todo-card').children('#delete-button').prop('enabled');
-//   };
-//
-//   $('#completed-button').toggleClass('active');
-// if ($(this).parents('.todo-card').hasClass('completed')) {
-//   storeCompleted ($(this), 'true')
-// } else {
-//   storeCompleted ($(this), 'false')
-// }
-// });
+// Zane - started working on the feature that lets users mark tasks as completed
+$('#display-side').on('click', '#completed-button', function () {
+  $(this).parents('.todo-card').toggleClass('completed');
+  $('#completed-button').toggleClass('completed-on');
+  $('#completed-button').toggleClass('completed-button');
 
-// function storeCompleted (presentCard, newCompleted) {
-//   var $idValue = $(presentCard).closest('.todo-card').attr('id');
-//   var parselsitem = JSON.parse(localStorage.getItem($idValue));
-//   parselsitem.completed = newCompleted;
-//   localStorage.setItem($idValue, JSON.stringify(parselsitem));
-// }
+  if ($(this).siblings('#upvote-button', '#downvote-button').prop('enabled')) {
+    $(this).siblings('#upvote-button', '#downvote-button').prop('disabled');
+  } else if ($(this).siblings('#upvote-button', '#downvote-button').toggleClass('disabled')) {
+    $(this).siblings('#upvote-button', '#downvote-button').prop('enabled');
+  };
+
+  if ($(this).hasClass('completed-on')) {
+    storeCompleted($(this), true);
+    console.log('blah')
+  } else {
+    storeCompleted($(this), false);
+  }
+});
+
+function storeCompleted (presentCard, newCompleted) {
+  var $idValue = $(presentCard).closest('.todo-card').attr('id');
+  var parselsitem = JSON.parse(localStorage.getItem($idValue));
+  parselsitem.complete = newCompleted;
+  localStorage.setItem($idValue, JSON.stringify(parselsitem));
+};
 
 $('#display-side').on('click', '#delete-button', function() {
   var $whatIsDeleted = $(this).closest('.todo-card');
@@ -156,7 +159,7 @@ function storeTitle ($idValue, $todoTitle) {
   var parselsitem = JSON.parse(localStorage.getItem($idValue));
   parselsitem.title = $todoTitle;
   localStorage.setItem($idValue, JSON.stringify(parselsitem));
-}
+};
 
 $('#display-side').on('blur', '#line-2', function () {
   var $todoBody = $(this).text();
