@@ -189,6 +189,13 @@ $('#display-side').on('click', '#delete-button', function() {
   localStorage.removeItem(idValue);
 });
 
+$('#hidden-cards').on('click', '#delete-button', function() {
+  var $whatIsDeleted = $(this).closest('.todo-card');
+  $whatIsDeleted.remove();
+  var idValue = $whatIsDeleted.attr('id');
+  localStorage.removeItem(idValue);
+});
+
 $('#display-side').on('blur', '.titleEdit', function () {
   var $todoTitle = $(this).text();
   var $idValue = $(this).closest('.todo-card').attr('id');
