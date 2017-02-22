@@ -88,6 +88,22 @@ body {
 .filter-button {
   background: #00A79D;
   border: none;
+  color: #FFFFFF;
+  display: inline-block;
+  font-size: 14px;
+  margin: 10px;
+  padding: 5px 10px;
+}
+
+.filter-button-holder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+}
+
+.filter-button:hover {
+  background: #045E55;
 }
 
 h1{
@@ -114,7 +130,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 60%;
+  min-height: 60%;
   width: 100%;
 }
 
@@ -160,7 +176,12 @@ p{
 }
 
 #save-button:hover {
-    background: #045E55;
+  background: #045E55;
+}
+
+#show-all-button {
+  display: block;
+  margin: 20px auto;
 }
 
 .todo-card {
@@ -195,7 +216,7 @@ p{
 
 
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   h1 {
     font-size: 70px;
   }
@@ -206,6 +227,10 @@ p{
     align-items: center;
     height: auto;
     width: 100%;
+  }
+
+  .filter-button-holder {
+    width: 50%;
   }
 
   .ninety {
