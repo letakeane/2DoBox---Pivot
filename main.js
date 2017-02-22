@@ -16,6 +16,11 @@ function loadAll() {
   }
 };
 
+$('#todo-content').on('keyup', function() {
+  var characterLength = $(this).val().length;
+  $('.character-count').text(characterLength);
+});
+
 $('#show-all-button').on('click', function () {
   $('.todo-card').remove();
   loadAll();

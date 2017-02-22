@@ -78,6 +78,10 @@ body {
   width: 100%;
 }
 
+#enter-div p {
+  margin: 10px;
+}
+
 #filter,
 #todo-title {
   font-size: 24px;
@@ -160,19 +164,19 @@ h2 {
   margin-top: 20px;
 }
 
-p{
+p {
   margin: 0;
 }
 
 #save-button {
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #FFFFFF;
   background: #00A79D;
   border: none;
-  padding-bottom: 4px;
-  letter-spacing: 1px;
+  color: #FFFFFF;
+  font-size: 20px;
   height: 32px;
+  letter-spacing: 1px;
+  margin: 0 0 20px 0;
+  padding-bottom: 4px;
 }
 
 #save-button:hover {
