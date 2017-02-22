@@ -216,11 +216,49 @@ $('#filter').on('keyup', function() {
       var filterText = $(this).text().toLowerCase();
       if (!!filterText.match(filterInput)) {
         $(this).closest('.todo-card').toggle(true);
-      }else {
+      } else {
         $(this).closest('.todo-card').toggle(false);
       }
     });
 });
+
+$('#critical-button').on('click', function() {
+  console.log('critical');
+  filterByImportance('critical');
+});
+
+$('#high-button').on('click', function() {
+  filterByImportance('high');
+});
+
+$('#normal-button').on('click', function() {
+  filterByImportance('normal');
+});
+
+$('#low-button').on('click', function() {
+  filterByImportance('low');
+});
+
+$('#none-button').on('click', function() {
+  filterByImportance('none');
+});
+
+$('#all-button').on('click', function() {
+  filterByImportance('');
+});
+
+function filterByImportance(importance) {
+  console.log($('#qual'));
+  $('#qual').each(function() {
+    var filterText = $(this).text();
+    if (!!filterText.match(importance)) {
+      $(this).closest('.todo-card').toggle(true);
+    } else {
+      $(this).closest('.todo-card').toggle(false);
+    }
+  })
+};
+
 
 $('#todo-title, #todo-content').on('keyup', function () {
   var $todoTitle = $('#todo-title');
