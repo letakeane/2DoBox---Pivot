@@ -44,7 +44,7 @@ function prependCard($id, $todoTitle, $todoContent, $importance, $complete, $hid
       <div id='line-3'>
         <button id='upvote-button'></button>
         <button id='downvote-button'></button>
-        <p id='importance-line'>importance: <span id="qual">${$importance}</span></p>
+        <p id='importance-line'>importance: <span class="qual">${$importance}</span></p>
         <button id='completed-button' class='${$complete}'></button>
       </div>
      </div>`);
@@ -61,7 +61,7 @@ function prependCard($id, $todoTitle, $todoContent, $importance, $complete, $hid
        <div id='line-3'>
          <button id='upvote-button'></button>
          <button id='downvote-button'></button>
-         <p id='importance-line'>importance: <span id="qual">${$importance}</span></p>
+         <p id='importance-line'>importance: <span class="qual">${$importance}</span></p>
          <button id='completed-button' class='${$complete}'></button>
        </div>
       </div>`);
@@ -161,7 +161,6 @@ $('#display-side').on('click', '#completed-button', function () {
 
   if ($(this).hasClass('completed-on')) {
     storeCompleted($(this), true);
-    console.log('blah')
   } else {
     storeCompleted($(this), false);
   }
@@ -176,7 +175,6 @@ function storeCompleted (presentCard, newCompleted) {
 
 $('#input-side').on('click', '#show-completed', function() {
   $('.todo-card').removeClass('hide');
-  console.log('blah blah')
 })
 
 $('#display-side').on('click', '#delete-button', function() {
@@ -223,34 +221,39 @@ $('#filter').on('keyup', function() {
 });
 
 $('#critical-button').on('click', function() {
-  console.log('critical');
+  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('critical');
 });
 
 $('#high-button').on('click', function() {
+  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('high');
 });
 
 $('#normal-button').on('click', function() {
+  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('normal');
 });
 
 $('#low-button').on('click', function() {
+  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('low');
 });
 
 $('#none-button').on('click', function() {
+  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('none');
 });
 
 $('#all-button').on('click', function() {
-  filterByImportance('');
+  $('.qual').closest('.todo-card').toggle(true);
 });
 
 function filterByImportance(importance) {
-  console.log($('#qual'));
-  $('#qual').each(function() {
+  console.log($('.qual'));
+  $('.qual').each(function() {
     var filterText = $(this).text();
+    console.log(filterText)
     if (!!filterText.match(importance)) {
       $(this).closest('.todo-card').toggle(true);
     } else {
