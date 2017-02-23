@@ -67,7 +67,7 @@ function prependCard($id, $todoTitle, $todoContent, $importance, $complete, $hid
          <button id='upvote-button'></button>
          <button id='downvote-button'></button>
          <p id='importance-line'>importance: <span class="qual">${$importance}</span></p>
-         <button class='completed-button' class='${$complete}'></button>
+         <button class='completed-button completed-on' class='${$complete}'></button>
        </div>
       </div>`);
     };
@@ -152,11 +152,19 @@ function storeImportance (presentCard, newImportance) {
   localStorage.setItem($idValue, JSON.stringify(parselsitem));
 }
 
-// Zane - started working on the feature that lets users mark tasks as completed
+$('#hidden-cards').on('click', '.completed-on', function () {
+  console.log($(this))
+  $(this).toggleClass('completed-on')
+    if ($(this).hasClass('completed-on')) {
+      storeCompleted($(this), true);
+    } else {
+      storeCompleted($(this), false);
+    }
+})
+
 $('#display-side').on('click', '.completed-button', function () {
-  $(this).parents('.todo-card').toggleClass('completed');
-  $('.completed-button').toggleClass('completed-on');
-  $('.completed-button').toggleClass('completed-button');
+  console.log($(this))
+  $(this).toggleClass('completed-on');
 
   if ($(this).siblings('#upvote-button', '#downvote-button').prop('enabled')) {
     $(this).siblings('#upvote-button', '#downvote-button').prop('disabled');
@@ -175,6 +183,7 @@ function storeCompleted (presentCard, newCompleted) {
   var $idValue = $(presentCard).closest('.todo-card').attr('id');
   var parselsitem = JSON.parse(localStorage.getItem($idValue));
   parselsitem.complete = newCompleted;
+  console.log(parselsitem)
   localStorage.setItem($idValue, JSON.stringify(parselsitem));
 };
 
@@ -233,27 +242,22 @@ $('#filter').on('keyup', function() {
 });
 
 $('#critical-button').on('click', function() {
-  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('critical');
 });
 
 $('#high-button').on('click', function() {
-  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('high');
 });
 
 $('#normal-button').on('click', function() {
-  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('normal');
 });
 
 $('#low-button').on('click', function() {
-  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('low');
 });
 
 $('#none-button').on('click', function() {
-  $('.qual').closest('.todo-card').toggle(true);
   filterByImportance('none');
 });
 
@@ -262,7 +266,7 @@ $('#all-button').on('click', function() {
 });
 
 function filterByImportance(importance) {
-  console.log($('.qual'));
+  $('.qual').closest('.todo-card').toggle(true);
   $('.qual').each(function() {
     var filterText = $(this).text();
     console.log(filterText)
