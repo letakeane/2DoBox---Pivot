@@ -50,7 +50,7 @@ function prependCard($id, $todoTitle, $todoContent, $importance, $complete, $hid
         <button id='upvote-button'></button>
         <button id='downvote-button'></button>
         <p id='importance-line'>importance: <span class="qual">${$importance}</span></p>
-        <button id='completed-button' class='${$complete}'></button>
+        <button class='completed-button' class='${$complete}'></button>
       </div>
      </div>`);
   } else {
@@ -67,7 +67,7 @@ function prependCard($id, $todoTitle, $todoContent, $importance, $complete, $hid
          <button id='upvote-button'></button>
          <button id='downvote-button'></button>
          <p id='importance-line'>importance: <span class="qual">${$importance}</span></p>
-         <button id='completed-button' class='${$complete}'></button>
+         <button class='completed-button' class='${$complete}'></button>
        </div>
       </div>`);
     };
@@ -153,10 +153,10 @@ function storeImportance (presentCard, newImportance) {
 }
 
 // Zane - started working on the feature that lets users mark tasks as completed
-$('#display-side').on('click', '#completed-button', function () {
+$('#display-side').on('click', '.completed-button', function () {
   $(this).parents('.todo-card').toggleClass('completed');
-  $('#completed-button').toggleClass('completed-on');
-  $('#completed-button').toggleClass('completed-button');
+  $('.completed-button').toggleClass('completed-on');
+  $('.completed-button').toggleClass('completed-button');
 
   if ($(this).siblings('#upvote-button', '#downvote-button').prop('enabled')) {
     $(this).siblings('#upvote-button', '#downvote-button').prop('disabled');
